@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="background-orb orb-1"></div>
+    <div class="background-orb orb-2"></div>
+
+    <div class="container">
+        <header class="glass-panel">
+            <div class="logo">
+                <i class="fa-solid fa-cat"></i> MemeStream
+            </div>
+            
+            <form method="POST" action="/" class="search-bar">
+                <input type="text" name="search" placeholder="Search trends..." autocomplete="off">
+                <button type="submit"><i class="fa-solid fa-search"></i></button>
+            </form>
+        </header>
+
+        <main>
+            <h2 class="section-title">{{ header }}</h2>
+            
+            <div class="grid-container">
+                {% for gif in gifs %}
+                <div class="card glass-panel">
+                    <div class="image-wrapper">
+                        <img src="{{ gif.preview }}" alt="{{ gif.title }}" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <p class="title">{{ gif.title }}</p>
+                        <a href="/download?url={{ gif.url }}&title={{ gif.title }}" class="download-btn">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Download
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+
+        <footer>
+            <p>Designed with <i class="fa-solid fa-heart"></i> using Flask</p>
+        </footer>
+    </div>
+
+</body>
+</html>
